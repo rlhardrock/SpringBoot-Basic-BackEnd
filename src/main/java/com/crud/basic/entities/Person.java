@@ -55,7 +55,7 @@ public class Person implements Serializable {
     @JsonIgnore
     private Set<Vehicle> vehicles = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JsonIgnore
     @JoinTable(name = "persons_sports",
             joinColumns = @JoinColumn(name = "personId"),

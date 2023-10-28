@@ -3,6 +3,7 @@ package com.crud.basic.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import org.hibernate.annotations.NaturalId;
 
 import java.io.Serializable;
 
@@ -13,7 +14,7 @@ import java.io.Serializable;
 @Table(name = "vehicles")
 public class Vehicle implements Serializable {
 
-    @Id
+    @Id  //@NaturalId
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vehicle_sequence")
     @SequenceGenerator(name = "vehicle_sequence", sequenceName = "vehicle_sequence", allocationSize = 1)
     @Column(name = "vehicleId")
@@ -21,6 +22,7 @@ public class Vehicle implements Serializable {
 
     @NotNull
     @NotEmpty
+    @NaturalId
     @Size(min= 5, max = 10, message = "minimo 5 y maximo 10")
     @Pattern(regexp = "^(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]+$", message = "todas deben ser mayúsculas")
     @Column(name="license", unique = true)
@@ -41,7 +43,7 @@ public class Vehicle implements Serializable {
     private String paint;
     private boolean shield = false;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personId")
     private Person person;
 
