@@ -5,8 +5,8 @@ spring:
 
   datasource:
     url: jdbc:postgresql://localhost:5432/crud
-    username: rey
-    password: perrito
+    username:
+    password:
 
   jpa:
     show-sql: true
